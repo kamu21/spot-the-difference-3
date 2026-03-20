@@ -5,6 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* スタート画面 */
 .intro-screen {
     display: flex;
     flex-direction: column;
@@ -13,6 +14,7 @@ body {
     height: 100vh;
 }
 
+/* ボタン */
 .start-btn {
     padding: 12px 25px;
     font-size: 18px;
@@ -23,6 +25,7 @@ body {
     border: none;
     border-radius: 8px;
     transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .start-btn:hover {
@@ -30,32 +33,37 @@ body {
     transform: scale(1.05);
 }
 
+/* ゲーム画面 */
 .game-screen {
     display: none;
-    padding: 20px;
+    padding: 10px;
 }
 
+/* 画像コンテナ */
 .image-container {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+    align-items: center;
+    gap: 20px;
+    height: 80vh; /* ← 高さを大きく使う */
 }
 
+/* 画像ラッパー */
 .image-wrapper {
     position: relative;
-    display: inline-block;
+    width: 45vw; /* ← 画面の45% */
+    max-width: 700px;
 }
 
+/* 画像 */
 .image-wrapper img {
-    width: 300px;
-    max-width: 90vw;
+    width: 100%;
     height: auto;
     border: 3px solid #333;
     border-radius: 10px;
 }
 
+/* 正解の丸 */
 .circle {
     position: absolute;
     width: 50px;
@@ -67,25 +75,39 @@ body {
     animation: pop 0.3s ease-out;
 }
 
+/* アニメーション */
 @keyframes pop {
     0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
     100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
+/* 結果表示 */
 .result {
-    font-size: 35px;
+    font-size: 28px;
     color: green;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
+/* 📱 スマホ（縦並び） */
 @media (max-width: 768px) {
     .image-container {
         flex-direction: column;
-        align-items: center;
-        gap: 20px;
+        height: auto;
     }
 
-    .image-wrapper img {
+    .image-wrapper {
         width: 95%;
+    }
+}
+
+/* 📲 タブレット横向き最適化（ここが重要） */
+@media (orientation: landscape) and (max-width: 1024px) {
+    .image-container {
+        gap: 10px;
+        height: 85vh;
+    }
+
+    .image-wrapper {
+        width: 48vw; /* ← ほぼ画面いっぱい */
     }
 }
