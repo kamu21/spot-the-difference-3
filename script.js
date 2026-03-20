@@ -1,5 +1,5 @@
+// JS部分
 const problems = [
-    // サンプル2問（追加で50～100問まで同じ形式で追加可能）
     {
         image1: "https://kamu21.github.io/gazou3/a1.png",
         image2: "https://kamu21.github.io/gazou3/a2.png",
@@ -41,39 +41,46 @@ function loadNextProblem() {
     if (currentProblemIndex >= problems.length) return;
 
     const problem = problems[currentProblemIndex];
-
-    document.getElementById("image1").src = problem.image1;
-    document.getElementById("image2").src = problem.image2;
+    const img1 = document.getElementById("image1");
+    const img2 = document.getElementById("image2");
 
     problem.mistakes.forEach(m => m.found = false);
     document.querySelectorAll(".circle").forEach(c => c.remove());
 
-    currentProblemIndex++;
+    // 画像読み込み後にクリック可能にする
+    img1.onload = () => {};
+    img2.onload = () => {};
+
+    img1.src = problem.image1;
+    img2.src = problem.image2;
 }
 
 // 間違いチェック
 function checkMistake(event, problem) {
     const rect = event.target.getBoundingClientRect();
-    const scaleX = event.target.naturalWidth / rect.width;
-    const scaleY = event.target.naturalHeight / rect.height;
-
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
-
-    console.log("クリック座標:", x.toFixed(0), y.toFixed(0));
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
     for (let mistake of problem.mistakes) {
         if (mistake.found) continue;
 
-        const distance = Math.sqrt((x - mistake.x) ** 2 + (y - mistake.y) ** 2);
+        const displayScaleX = rect.width / event.target.naturalWidth;
+        const displayScaleY = rect.height / event.target.naturalHeight;
+        const displayRadius = mistake.radius * ((displayScaleX + displayScaleY) / 2);
 
-        if (distance < mistake.radius) {
+        const distance = Math.sqrt(
+            ((x - mistake.x * displayScaleX) ** 2) +
+            ((y - mistake.y * displayScaleY) ** 2)
+        );
+
+        if (distance < displayRadius) {
             mistake.found = true;
             totalCorrect++;
             showCircle(event.target, mistake.x, mistake.y);
             correctSound.play();
 
             if (problem.mistakes.every(m => m.found)) {
+                currentProblemIndex++;
                 if (totalCorrect % 5 === 0) {
                     showCheckpoint();
                 } else {
@@ -124,11 +131,11 @@ document.getElementById("finish-btn").addEventListener("click", function() {
 
 // 画像クリックイベント
 document.getElementById("image1").addEventListener("click", function(event) {
-    const problem = problems[currentProblemIndex - 1];
+    const problem = problems[currentProblemIndex];
     checkMistake(event, problem);
 });
 
 document.getElementById("image2").addEventListener("click", function(event) {
-    const problem = problems[currentProblemIndex - 1];
+    const problem = problems[currentProblemIndex];
     checkMistake(event, problem);
 });
