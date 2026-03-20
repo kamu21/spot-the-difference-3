@@ -17,7 +17,7 @@ const problems = [
             { x: 105, y: 496, radius: 160, found: false },
             { x: 489, y: 153, radius: 160, found: false }
         ]
-    }
+    },
     {
         image1: "https://kamu21.github.io/gazou3/a5.png",
         image2: "https://kamu21.github.io/gazou3/a6.png",
@@ -26,7 +26,7 @@ const problems = [
             { x: 104, y: 479, radius: 160, found: false },
             { x: 554, y: 432, radius: 160, found: false }
         ]
-    }
+    },
     {
         image1: "https://kamu21.github.io/gazou3/a7.png",
         image2: "https://kamu21.github.io/gazou3/a8.png",
@@ -35,7 +35,7 @@ const problems = [
             { x: 487, y: 160, radius: 160, found: false },
             { x: 330, y: 544, radius: 160, found: false }
         ]
-    }
+    },
     {
         image1: "https://kamu21.github.io/gazou3/a9.png",
         image2: "https://kamu21.github.io/gazou3/a10.png",
