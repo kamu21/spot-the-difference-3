@@ -4,9 +4,9 @@ const problems = [
         image1: "https://kamu21.github.io/gazou3/a1.png",
         image2: "https://kamu21.github.io/gazou3/a2.png",
         mistakes: [
-            { x: 580, y: 511, radius: 160, found: false },
-            { x: 923, y: 413, radius: 160, found: false },
-            { x: 1272, y: 235, radius: 160, found: false }
+            { x: 107, y: 95, radius: 160, found: false },
+            { x: 320, y: 360, radius: 160, found: false },
+            { x: 551, y: 562, radius: 160, found: false }
         ]
     },
     {
