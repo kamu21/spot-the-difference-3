@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>間違い探しゲーム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- スタート画面 -->
+<div id="intro-screen" class="intro-screen">
+    <h1>間違い探し</h1>
+    <p>画像の違いを見つけてクリックしてください！</p>
+    <button id="start-btn" class="start-btn">スタート</button>
+</div>
+
+<!-- ゲーム画面 -->
+<div id="game-screen" class="game-screen" style="display:none;">
+    <div class="image-container">
+        <div class="image-wrapper">
+            <img id="image1" alt="画像1">
+        </div>
+        <div class="image-wrapper">
+            <img id="image2" alt="画像2">
+        </div>
+    </div>
+    <div id="result" class="result"></div>
+
+    <audio id="bgm" loop autoplay>
+        <source src="bgm.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="correctSound">
+        <source src="correct.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<!-- 5問クリアチェックポイント画面 -->
+<div id="checkpoint-screen" class="intro-screen" style="display:none;">
+    <h1>5問クリア！</h1>
+    <p>あと5問進めますか？</p>
+    <button id="next5-btn" class="start-btn">次の5問へ</button>
+    <button id="finish-btn" class="start-btn">ここで終了</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
