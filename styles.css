@@ -2,10 +2,10 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    background-color: #f4f4f4; /* ← 元に戻す */
+    background-color: #f4f4f4;
 }
 
-/* スタート＆チェックポイント（元のまま） */
+/* スタート＆結果画面 */
 .intro-screen {
     display: flex;
     flex-direction: column;
@@ -24,74 +24,94 @@ body {
     color: white;
     border: none;
     border-radius: 8px;
-    transition: 0.3s;
-}
-
-.start-btn:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
 }
 
 /* ゲーム画面 */
 .game-screen {
     display: none;
-    padding: 5px; /* ← 余白を最小に */
+    flex-direction: column;
+    height: 100dvh;
 }
 
-/* 画像コンテナ（ここが重要） */
+/* 画像エリア */
 .image-container {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px; /* ← ほぼ隙間なし */
-    height: 85vh; /* ← 画面いっぱい近く */
+    gap: 5px;
 }
 
 /* 画像ラッパー */
 .image-wrapper {
     position: relative;
-    width: 48vw; /* ← 画面のほぼ半分 */
+    width: 48vw;
     max-width: 800px;
+    aspect-ratio: 4 / 3;
 }
 
 /* 画像 */
 .image-wrapper img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
     border: 3px solid #333;
     border-radius: 10px;
+    cursor: crosshair;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
-/* 正解マーク */
+/* ③ 赤丸（太く + アニメ） */
 .circle {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    border: 4px solid red;
+    width: 6vw;
+    height: 6vw;
+    min-width: 40px;
+    min-height: 40px;
+    border: 6px solid red;
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    animation: pop 0.3s ease-out;
+    animation: pop 0.2s ease;
 }
 
-/* アニメーション */
 @keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    from {
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
-/* 結果表示 */
+/* ② 下UI */
+.bottom-ui {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
 .result {
-    font-size: 24px;
-    color: green;
-    margin-top: 5px;
+    font-size: 18px;
+}
+
+.timer {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 結果画面 */
+#final-score {
+    font-size: 28px;
+    margin-top: 20px;
 }
 
 /* スマホ */
 @media (max-width: 768px) {
     .image-container {
         flex-direction: column;
-        height: auto;
     }
 
     .image-wrapper {
@@ -99,14 +119,25 @@ body {
     }
 }
 
-/* タブレット横（重要） */
+/* ① タブレット横 最大化 */
 @media (orientation: landscape) and (max-width: 1024px) {
+
+    .game-screen {
+        height: 100dvh;
+    }
+
     .image-container {
-        height: 90vh;
-        gap: 5px;
+        flex: 1;
+        align-items: stretch;
     }
 
     .image-wrapper {
-        width: 49vw; /* ← かなり大きく */
+        width: 50vw;
+        height: 100%;
+    }
+
+    .image-wrapper img {
+        height: 100%;
+        object-fit: contain;
     }
 }
