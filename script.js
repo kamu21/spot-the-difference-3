@@ -44,6 +44,33 @@ const problems = [
             { x: 499, y: 526, radius: 160 }
         ]
     }
+        {
+        image1: "https://kamu21.github.io/gazou3/a11.png",
+        image2: "https://kamu21.github.io/gazou3/a12.png",
+        mistakes: [
+            { x: 273, y: 79, radius: 160 },
+            { x: 158, y: 366, radius: 160 },
+            { x: 395, y: 513, radius: 160 }
+        ]
+    },
+        {
+        image1: "https://kamu21.github.io/gazou3/a13.png",
+        image2: "https://kamu21.github.io/gazou3/a14.png",
+        mistakes: [
+            { x: 558, y: 158, radius: 160 },
+            { x: 308, y: 358, radius: 160 },
+            { x: 67, y: 570, radius: 160 }
+        ]
+    },
+        {
+        image1: "https://kamu21.github.io/gazou3/a15.png",
+        image2: "https://kamu21.github.io/gazou3/a16.png",
+        mistakes: [
+            { x: 475, y: 75, radius: 160 },
+            { x: 197, y: 363, radius: 160 },
+            { x: 276, y: 506, radius: 160 }
+        ]
+    }
 ];
 
 let currentProblemIndex = 0;
