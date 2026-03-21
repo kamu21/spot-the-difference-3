@@ -43,7 +43,7 @@ const problems = [
             { x: 252, y: 447, radius: 160 },
             { x: 499, y: 526, radius: 160 }
         ]
-    }
+    },
         {
         image1: "https://kamu21.github.io/gazou3/a11.png",
         image2: "https://kamu21.github.io/gazou3/a12.png",
