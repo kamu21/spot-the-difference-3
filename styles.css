@@ -141,3 +141,10 @@ body {
         object-fit: contain;
     }
 }
+
+/* ▼ 長押しメニュー防止（必須） */
+.image-wrapper img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
