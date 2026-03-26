@@ -43,39 +43,13 @@ const problems = [
             { x: 252, y: 447, radius: 160 },
             { x: 499, y: 526, radius: 160 }
         ]
-    },
-        {
-        image1: "https://kamu21.github.io/gazou3/a11.png",
-        image2: "https://kamu21.github.io/gazou3/a12.png",
-        mistakes: [
-            { x: 273, y: 79, radius: 160 },
-            { x: 158, y: 366, radius: 160 },
-            { x: 395, y: 513, radius: 160 }
-        ]
-    },
-        {
-        image1: "https://kamu21.github.io/gazou3/a13.png",
-        image2: "https://kamu21.github.io/gazou3/a14.png",
-        mistakes: [
-            { x: 558, y: 158, radius: 160 },
-            { x: 308, y: 358, radius: 160 },
-            { x: 67, y: 570, radius: 160 }
-        ]
-    },
-        {
-        image1: "https://kamu21.github.io/gazou3/a15.png",
-        image2: "https://kamu21.github.io/gazou3/a16.png",
-        mistakes: [
-            { x: 475, y: 75, radius: 160 },
-            { x: 197, y: 363, radius: 160 },
-            { x: 276, y: 506, radius: 160 }
-        ]
     }
 ];
 
 let currentProblemIndex = 0;
 let timeLeft = 180;
 let timerInterval;
+let lastTouchTime = 0;
 
 const bgm = document.getElementById("bgm");
 const correctSound = document.getElementById("correctSound");
@@ -115,6 +89,10 @@ function startTimer() {
 
     timerInterval = setInterval(() => {
         timeLeft--;
+
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+        }
 
         let min = Math.floor(timeLeft / 60);
         let sec = timeLeft % 60;
@@ -198,7 +176,7 @@ function getCorrectedClickPosition(event) {
     };
 }
 
-// 判定（★ミス時は完全無反応）
+// 判定
 function checkMistake(event) {
     const problem = problems[currentProblemIndex];
 
@@ -229,8 +207,6 @@ function checkMistake(event) {
             return;
         }
     }
-
-    // ← 何も処理しない（完全無反応）
 }
 
 // 丸表示
@@ -272,9 +248,38 @@ function showCircle(id, x, y) {
     circleSound.play().catch(() => {});
 }
 
-// クリック
-document.getElementById("image1").onclick = checkMistake;
-document.getElementById("image2").onclick = checkMistake;
+// ⭐ タップ＆クリック完全対応（ここが重要）
+function handleInput(event) {
+    const now = Date.now();
+
+    // タッチ後のクリック無視（二重防止）
+    if (event.type === "click" && now - lastTouchTime < 500) {
+        return;
+    }
+
+    if (event.touches) {
+        lastTouchTime = now;
+        event.clientX = event.touches[0].clientX;
+        event.clientY = event.touches[0].clientY;
+    }
+
+    checkMistake(event);
+}
+
+// イベント登録
+const img1 = document.getElementById("image1");
+const img2 = document.getElementById("image2");
+
+img1.addEventListener("click", handleInput);
+img2.addEventListener("click", handleInput);
+
+img1.addEventListener("touchstart", handleInput, { passive: true });
+img2.addEventListener("touchstart", handleInput, { passive: true });
+
+// 長押しメニュー完全禁止
+document.querySelectorAll("img").forEach(img => {
+    img.addEventListener("contextmenu", e => e.preventDefault());
+});
 
 // リスタート
 document.getElementById("restart-btn").onclick = () => {
