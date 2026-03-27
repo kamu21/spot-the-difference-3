@@ -148,3 +148,26 @@ body {
     -webkit-user-select: none;
     user-select: none;
 }
+
+/* ===== 文字サイズ強化（1.5倍） ===== */
+
+.intro-screen h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.intro-screen p {
+    font-size: 1.5em;
+    line-height: 1.6;
+}
+
+/* ボタンも少し大きく */
+.start-btn {
+    font-size: 20px;
+    padding: 14px 30px;
+}
+
+/* 結果スコア拡大 */
+#final-score {
+    font-size: 42px;
+}
