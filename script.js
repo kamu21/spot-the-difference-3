@@ -133,6 +133,141 @@ const problems = [
             { x: 295, y: 406, radius: 160 },
             { x: 180, y: 550, radius: 160 }
         ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a31.png",
+        image2: "https://kamu21.github.io/gazou3/a32.png",
+        mistakes: [
+            { x: 136, y: 86, radius: 160 },
+            { x: 83, y: 559, radius: 160 },
+            { x: 469, y: 563, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a33.png",
+        image2: "https://kamu21.github.io/gazou3/a34.png",
+        mistakes: [
+            { x: 370, y: 92, radius: 160 },
+            { x: 163, y: 316, radius: 160 },
+            { x: 587, y: 328, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a35.png",
+        image2: "https://kamu21.github.io/gazou3/a36.png",
+        mistakes: [
+            { x: 65, y: 90, radius: 160 },
+            { x: 68, y: 499, radius: 160 },
+            { x: 464, y: 513, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a37.png",
+        image2: "https://kamu21.github.io/gazou3/a38.png",
+        mistakes: [
+            { x: 536, y: 58, radius: 160 },
+            { x: 121, y: 105, radius: 160 },
+            { x: 338, y: 564, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a39.png",
+        image2: "https://kamu21.github.io/gazou3/a40.png",
+        mistakes: [
+            { x: 551, y: 132, radius: 160 },
+            { x: 77, y: 200, radius: 160 },
+            { x: 208, y: 475, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a41.png",
+        image2: "https://kamu21.github.io/gazou3/a42.png",
+        mistakes: [
+            { x: 290, y: 92, radius: 160 },
+            { x: 107, y: 241, radius: 160 },
+            { x: 368, y: 464, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a43.png",
+        image2: "https://kamu21.github.io/gazou3/a44.png",
+        mistakes: [
+            { x: 98, y: 193, radius: 160 },
+            { x: 546, y: 380, radius: 160 },
+            { x: 304, y: 576, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a45.png",
+        image2: "https://kamu21.github.io/gazou3/a46.png",
+        mistakes: [
+            { x: 226, y: 63, radius: 160 },
+            { x: 585, y: 150, radius: 160 },
+            { x: 351, y: 550, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a47.png",
+        image2: "https://kamu21.github.io/gazou3/a48.png",
+        mistakes: [
+            { x: 282, y: 90, radius: 160 },
+            { x: 111, y: 561, radius: 160 },
+            { x: 516, y: 454, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a49.png",
+        image2: "https://kamu21.github.io/gazou3/a50.png",
+        mistakes: [
+            { x: 106, y: 170, radius: 160 },
+            { x: 112, y: 495, radius: 160 },
+            { x: 589, y: 515, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a51.png",
+        image2: "https://kamu21.github.io/gazou3/a52.png",
+        mistakes: [
+            { x: 538, y: 114, radius: 160 },
+            { x: 63, y: 83, radius: 160 },
+            { x: 200, y: 508, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a53.png",
+        image2: "https://kamu21.github.io/gazou3/a54.png",
+        mistakes: [
+            { x: 285, y: 78, radius: 160 },
+            { x: 79, y: 328, radius: 160 },
+            { x: 270, y: 585, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a55.png",
+        image2: "https://kamu21.github.io/gazou3/a56.png",
+        mistakes: [
+            { x: 99, y: 94, radius: 160 },
+            { x: 522, y: 230, radius: 160 },
+            { x: 511, y: 547, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a57.png",
+        image2: "https://kamu21.github.io/gazou3/a58.png",
+        mistakes: [
+            { x:549, y: 83, radius: 160 },
+            { x: 480, y: 420, radius: 160 },
+            { x: 127, y: 493, radius: 160 }
+        ]
+    },
+    {
+        image1: "https://kamu21.github.io/gazou3/a59.png",
+        image2: "https://kamu21.github.io/gazou3/a60.png",
+        mistakes: [
+            { x: 535, y: 127, radius: 160 },
+            { x: 66, y: 289, radius: 160 },
+            { x: 534, y: 539, radius: 160 }
+        ]
     }
 ];
 
