@@ -269,7 +269,7 @@ const problems = [
             { x: 534, y: 539, radius: 160 }
         ]
     }
-        {
+    {
         image1: "https://kamu21.github.io/gazou3/a61.png",
         image2: "https://kamu21.github.io/gazou3/a62.png",
         mistakes: [
