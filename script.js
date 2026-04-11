@@ -365,6 +365,7 @@ let currentProblemIndex = 0;
 let timeLeft = 180;
 let timerInterval;
 let lastTouchTime = 0;
+let timeUp = false; // タイマー終了フラグ
 
 const bgm = document.getElementById("bgm");
 const correctSound = document.getElementById("correctSound");
@@ -386,6 +387,7 @@ document.getElementById("start-btn").addEventListener("click", () => {
 
     currentProblemIndex = 0;
     timeLeft = 180;
+    timeUp = false;
 
     shuffle(problems);
 
@@ -407,18 +409,14 @@ function startTimer() {
 
         if (timeLeft <= 0) {
             timeLeft = 0;
+            timeUp = true; // タイマー終了フラグ
+            clearInterval(timerInterval); // タイマー停止
         }
 
         let min = Math.floor(timeLeft / 60);
         let sec = timeLeft % 60;
 
-        timerEl.textContent =
-            `残り ${min}:${sec.toString().padStart(2, "0")}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            endGame();
-        }
+        timerEl.textContent = `残り ${min}:${sec.toString().padStart(2, "0")}`;
     }, 1000);
 }
 
@@ -515,9 +513,16 @@ function checkMistake(event) {
             correctSound.currentTime = 0;
             correctSound.play().catch(() => {});
 
+            // 問題の全ての間違いが見つかった場合
             if (problem.mistakes.every(mm => mm.found)) {
                 currentProblemIndex++;
-                setTimeout(loadNextProblem, 800);
+
+                if (timeUp || currentProblemIndex >= problems.length) {
+                    // タイマー終了済みなら完全クリア後に終了
+                    setTimeout(endGame, 500);
+                } else {
+                    setTimeout(loadNextProblem, 800);
+                }
             }
             return;
         }
@@ -563,14 +568,11 @@ function showCircle(id, x, y) {
     circleSound.play().catch(() => {});
 }
 
-// ⭐ タップ＆クリック完全対応（ここが重要）
+// ⭐ タップ＆クリック完全対応
 function handleInput(event) {
     const now = Date.now();
 
-    // タッチ後のクリック無視（二重防止）
-    if (event.type === "click" && now - lastTouchTime < 500) {
-        return;
-    }
+    if (event.type === "click" && now - lastTouchTime < 500) return;
 
     if (event.touches) {
         lastTouchTime = now;
@@ -591,7 +593,7 @@ img2.addEventListener("click", handleInput);
 img1.addEventListener("touchstart", handleInput, { passive: true });
 img2.addEventListener("touchstart", handleInput, { passive: true });
 
-// 長押しメニュー完全禁止
+// 長押しメニュー禁止
 document.querySelectorAll("img").forEach(img => {
     img.addEventListener("contextmenu", e => e.preventDefault());
 });
