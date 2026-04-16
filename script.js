@@ -444,7 +444,7 @@ const problems = [
         image1: "https://kamu21.github.io/gazou3/a99.png",
         image2: "https://kamu21.github.io/gazou3/a100.png",
         mistakes: [
-            { x: 340, y: 123, radius: 200 },
+            { x: 344, y: 330, radius: 200 },
             { x: 112, y: 559, radius: 160 },
             { x: 536, y: 556, radius: 160 }
         ]
