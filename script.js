@@ -947,11 +947,8 @@ function handleInput(event) {
 const img1 = document.getElementById("image1");
 const img2 = document.getElementById("image2");
 
-img1.addEventListener("click", handleInput);
-img2.addEventListener("click", handleInput);
-
-img1.addEventListener("touchstart", handleInput, { passive: true });
-img2.addEventListener("touchstart", handleInput, { passive: true });
+img1.addEventListener("pointerdown", handleInput);
+img2.addEventListener("pointerdown", handleInput);
 
 // 長押しメニュー禁止
 document.querySelectorAll("img").forEach(img => {
