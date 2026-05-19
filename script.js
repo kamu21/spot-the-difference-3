@@ -960,3 +960,15 @@ document.getElementById("restart-btn").onclick = () => {
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("intro-screen").style.display = "flex";
 };
+
+// 画像にクリック（タップ）イベントを登録
+document.getElementById("image1").addEventListener("click", checkMistake);
+document.getElementById("image2").addEventListener("click", checkMistake);
+
+// 画像を長押ししたときにメニュー（プレビュー）が出るのを防ぐ
+document.getElementById("image1").addEventListener("contextmenu", (e) => e.preventDefault());
+document.getElementById("image2").addEventListener("contextmenu", (e) => e.preventDefault());
+
+// 画像を長押しして指を動かしたときにドラッグされるのを防ぐ
+document.getElementById("image1").addEventListener("dragstart", (e) => e.preventDefault());
+document.getElementById("image2").addEventListener("dragstart", (e) => e.preventDefault());
