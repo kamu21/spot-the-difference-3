@@ -960,7 +960,3 @@ document.getElementById("restart-btn").onclick = () => {
     document.getElementById("result-screen").style.display = "none";
     document.getElementById("intro-screen").style.display = "flex";
 };
-
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-}
