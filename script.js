@@ -1,3 +1,5 @@
+const preloadCache = {};
+
 const problems = [
     {
         image1: "https://kamu21.github.io/gazou3/a1.png",
@@ -740,6 +742,28 @@ function shuffle(array) {
     }
 }
 
+function preloadNextProblem() {
+
+    for (let i = 1; i <= 3; i++) {
+
+        const next = problems[currentProblemIndex + i];
+        if (!next) continue;
+
+        [next.image1, next.image2].forEach(src => {
+
+            if (preloadCache[src]) return;
+
+            const img = new Image();
+
+            img.onload = () => {
+                preloadCache[src] = true;
+            };
+
+            img.src = src;
+        });
+    }
+}
+
 // スタート
 document.getElementById("start-btn").addEventListener("click", () => {
     document.getElementById("intro-screen").style.display = "none";
@@ -813,6 +837,8 @@ function loadNextProblem() {
     document.getElementById("image2").src = problem.image2;
 
     problem.mistakes.forEach(m => m.found = false);
+
+    preloadNextProblem();
 }
 
 // クリック位置補正
