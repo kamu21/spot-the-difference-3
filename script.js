@@ -790,7 +790,7 @@ const problems = [
         mistakes: [
             { x: 325, y: 94, radius: 160 },
             { x: 282, y: 407, radius: 160 },
-            { x: 288, y: 560, radius: 160 }
+            { x: 526, y: 534, radius: 160 }
         ]
     },
     {
