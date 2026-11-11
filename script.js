@@ -1,5 +1,39 @@
 const preloadCache = {};
 
+// 画像を確実に読み込む
+function preloadImage(src) {
+
+    if (preloadCache[src]) {
+        return preloadCache[src];
+    }
+
+    preloadCache[src] = new Promise((resolve, reject) => {
+
+        const img = new Image();
+
+        img.onload = async () => {
+
+            try {
+                if (img.decode) {
+                    await img.decode();
+                }
+            } catch (e) {}
+
+            resolve(src);
+        };
+
+        img.onerror = () => {
+            delete preloadCache[src];
+            reject(src);
+        };
+
+        img.src = src;
+
+    });
+
+    return preloadCache[src];
+}
+
 const problems = [
     {
         image1: "https://kamu21.github.io/gazou3/a1.png",
@@ -922,45 +956,135 @@ function shuffle(array) {
     }
 }
 
+
 function preloadNextProblem() {
 
     for (let i = 1; i <= 3; i++) {
 
         const next = problems[currentProblemIndex + i];
+
         if (!next) continue;
 
-        [next.image1, next.image2].forEach(src => {
+        preloadImage(next.image1).catch(() => {});
+        preloadImage(next.image2).catch(() => {});
 
-            if (preloadCache[src]) return;
-
-            const img = new Image();
-
-            img.onload = () => {
-                preloadCache[src] = true;
-            };
-
-            img.src = src;
-        });
     }
 }
 
-// スタート
-document.getElementById("start-btn").addEventListener("click", () => {
-    document.getElementById("intro-screen").style.display = "none";
-    document.getElementById("game-screen").style.display = "flex";
+
+
+ 
+// スタート・事前読み込み
+document.getElementById("start-btn").addEventListener("click", async () => {
+
+    const intro = document.getElementById("intro-screen");
+    const game = document.getElementById("game-screen");
+    const loading = document.getElementById("loading-screen");
+    const progress = document.getElementById("loading-progress");
+    const startBtn = document.getElementById("start-btn");
+
+    startBtn.disabled = true;
+
+    intro.style.display = "none";
+    game.style.display = "none";
+    loading.style.display = "flex";
 
     currentProblemIndex = 0;
     timeLeft = 180;
     timeUp = false;
 
+    // 問題をシャッフル
     shuffle(problems);
 
+    // BGMを準備
+    const originalVolume = bgm.volume;
+
     bgm.currentTime = 0;
+    bgm.volume = 0;
     bgm.play().catch(() => {});
 
+    // 最初の5問、合計10枚を先読み
+    const firstProblems = problems.slice(0, 5);
+
+    const images = [];
+
+    firstProblems.forEach(problem => {
+        images.push(problem.image1);
+        images.push(problem.image2);
+    });
+
+    let loaded = 0;
+    let failed = 0;
+
+    // 画像をすべて読み込む
+    const loadingTasks = images.map(async (src) => {
+
+        let success = false;
+
+        // 最大3回まで読み込みを試す
+        for (let attempt = 1; attempt <= 3; attempt++) {
+
+            try {
+                await preloadImage(src);
+                success = true;
+                break;
+
+            } catch (error) {
+
+                console.log(
+                    `画像読み込み再試行 ${attempt}/3`,
+                    src
+                );
+
+                // 少し待って再試行
+                if (attempt < 3) {
+                    await new Promise(resolve =>
+                        setTimeout(resolve, 1000)
+                    );
+                }
+            }
+        }
+
+        if (!success) {
+            failed++;
+        }
+
+        loaded++;
+
+        progress.textContent =
+            `${loaded} / ${images.length} 枚 読み込み完了`;
+
+        return success;
+    });
+
+    // 10枚すべての読み込み完了を待つ
+    const results = await Promise.all(loadingTasks);
+
+    // 1枚でも読み込めなかった場合は開始しない
+    if (results.some(success => !success)) {
+
+        progress.textContent =
+            `${failed}枚の画像が読み込めませんでした。Wi-Fiを確認して再度スタートしてください。`;
+
+        startBtn.disabled = false;
+
+        return;
+    }
+
+    // すべて読み込み完了
+    loading.style.display = "none";
+    game.style.display = "flex";
+
+    bgm.volume = originalVolume;
+
+    // ゲーム開始
     startTimer();
     loadNextProblem();
+
+    startBtn.disabled = false;
+
 });
+
 
 // タイマー
 function startTimer() {
@@ -1174,3 +1298,21 @@ document.getElementById("image2").addEventListener("contextmenu", (e) => e.preve
 // 画像を長押しして指を動かしたときにドラッグされるのを防ぐ
 document.getElementById("image1").addEventListener("dragstart", (e) => e.preventDefault());
 document.getElementById("image2").addEventListener("dragstart", (e) => e.preventDefault());
+
+// 全画面表示
+async function toggleFullscreen() {
+
+    try {
+        if (!document.fullscreenElement) {
+
+            await document.documentElement.requestFullscreen();
+
+        } else {
+
+            await document.exitFullscreen();
+
+        }
+    } catch (error) {
+        alert("このブラウザでは全画面表示に対応していない場合があります。");
+    }
+}
