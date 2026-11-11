@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>間違い探しゲーム</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -9,44 +10,75 @@
 
 <!-- スタート画面 -->
 <div id="intro-screen" class="intro-screen">
+
+    <!-- 全画面表示ボタン -->
+    <button class="fullscreen-button" onclick="toggleFullscreen()">
+        全画面表示 ⛶
+    </button>
+
     <h1>間違い探し</h1>
     <p>違いを見つけて　軽くタッチ！　（３分間）</p>
     <button id="start-btn" class="start-btn">スタート</button>
+
+</div>
+
+<!-- 読み込み画面 -->
+<div id="loading-screen" style="display:none;">
+
+    <h1>画像を準備しています</h1>
+
+    <p id="loading-progress">
+        0 / 8 枚 読み込み中...
+    </p>
+
+    <p>
+        恐れ入りますが　少々お待ちください
+    </p>
+
 </div>
 
 <!-- ゲーム画面 -->
 <div id="game-screen" class="game-screen">
 
     <div class="image-container">
+
         <div class="image-wrapper">
             <img id="image1">
         </div>
+
         <div class="image-wrapper">
             <img id="image2">
         </div>
+
     </div>
 
-    <!-- ② 横並びUI -->
+    <!-- 下部UI -->
     <div class="bottom-ui">
+
         <div id="result" class="result"></div>
-        <div id="timer" class="timer">残り 3:00</div>
+
+        <div id="timer" class="timer">
+            残り 3:00
+        </div>
+
     </div>
 
-    <!-- 音 -->
+    <!-- BGM -->
     <audio id="bgm" loop>
         <source src="bgm.mp3" type="audio/mp3">
     </audio>
 
+    <!-- 正解音 -->
     <audio id="correctSound">
         <source src="correct.mp3" type="audio/mp3">
     </audio>
 
-    <!-- ④ 赤丸音 -->
+    <!-- 赤丸音 -->
     <audio id="circleSound">
         <source src="circle.mp3" type="audio/mp3">
     </audio>
 
-    <!-- ⑤ 結果音 -->
+    <!-- 結果音 -->
     <audio id="resultSound">
         <source src="result2.mp3" type="audio/mp3">
     </audio>
@@ -55,11 +87,18 @@
 
 <!-- 結果画面 -->
 <div id="result-screen" class="intro-screen" style="display:none;">
+
     <h1>３分が経過しました👏</h1>
+
     <p id="final-score"></p>
-    <button id="restart-btn" class="start-btn">もう一度挑戦</button>
+
+    <button id="restart-btn" class="start-btn">
+        もう一度挑戦
+    </button>
+
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
