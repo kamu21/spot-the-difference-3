@@ -171,3 +171,33 @@ body {
 #final-score {
     font-size: 42px;
 }
+
+/* 全画面表示ボタン */
+/* 全画面表示ボタン */
+.fullscreen-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+}
+
+/* 読み込み画面 */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #f4f4f4;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#loading-screen h1 {
+    font-size: 28px;
+}
+
+#loading-screen p {
+    font-size: 20px;
+}
