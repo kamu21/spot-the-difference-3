@@ -943,9 +943,7 @@ let timerInterval;
 let lastTouchTime = 0;
 let timeUp = false; // タイマー終了フラグ
 
-const bgm = document.getElementById("bgm");
 const correctSound = document.getElementById("correctSound");
-const circleSound = document.getElementById("circleSound");
 const resultSound = document.getElementById("resultSound");
 
 // シャッフル
@@ -995,13 +993,6 @@ document.getElementById("start-btn").addEventListener("click", async () => {
 
     // 問題をシャッフル
     shuffle(problems);
-
-    // BGMを準備
-    const originalVolume = bgm.volume;
-
-    bgm.currentTime = 0;
-    bgm.volume = 0;
-    bgm.play().catch(() => {});
 
     // 最初の5問、合計10枚を先読み
     const firstProblems = problems.slice(0, 5);
@@ -1075,8 +1066,6 @@ document.getElementById("start-btn").addEventListener("click", async () => {
     loading.style.display = "none";
     game.style.display = "flex";
 
-    bgm.volume = originalVolume;
-
     // ゲーム開始
     startTimer();
     loadNextProblem();
@@ -1117,8 +1106,6 @@ function endGame() {
 
     document.getElementById("final-score").textContent =
         `あなたは ${currentProblemIndex} 問クリアしました！`;
-
-    bgm.pause();
 
     resultSound.currentTime = 0;
     resultSound.play().catch(() => {});
@@ -1199,9 +1186,6 @@ function checkMistake(event) {
 
             showCircle("image1", m.x, m.y);
             showCircle("image2", m.x, m.y);
-
-            correctSound.currentTime = 0;
-            correctSound.play().catch(() => {});
 
             // 問題の全ての間違いが見つかった場合
             if (problem.mistakes.every(mm => mm.found)) {
